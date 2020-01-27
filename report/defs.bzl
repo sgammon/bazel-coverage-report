@@ -13,6 +13,8 @@
 # limitations under the License.
 """Coverage report generation."""
 
+load("@bazel_tools//tools/build_defs/repo:git.bzl", "new_git_repository")
+
 _LCOV_BUILD_FILE_CONTENT = """
 filegroup(
     name = "bin",
@@ -25,7 +27,7 @@ def bazel_coverage_report_repositories():
   """Add to the WORKSPACE external dependencies needed by the generator.
   """
   if "lcov" not in native.existing_rules():
-    native.new_git_repository(
+    new_git_repository(
         name = "lcov",
         build_file_content = _LCOV_BUILD_FILE_CONTENT,
         commit = "a5dd9529f9232b8d901a4d6eb9ae54cae179e5b3",
